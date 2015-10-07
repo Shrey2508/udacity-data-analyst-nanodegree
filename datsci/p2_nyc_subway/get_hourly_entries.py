@@ -39,16 +39,10 @@ def get_hourly_entries(df):
     df['ENTRIESn_hourly'] = df['ENTRIESn_hourly'].fillna(1)
     df.drop('PrevEntriesN', axis=1, inplace=True)
 
-    for i, row in df.iterrows():
-        print row
-
     return df
-
-def f(row):
-    row['ENTRIESn_hourly'] = 5
-    #print row
-    return row
 
 if __name__ == '__main__':
     df = pandas.read_csv('data/hourly_entries.csv')
-    get_hourly_entries(df)
+    df = get_hourly_entries(df)
+    for i, row in df.iterrows():
+        print row
