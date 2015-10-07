@@ -32,7 +32,13 @@ def get_hourly_entries(df):
     10    A002  R051  02-00-00  05-02-11  16:00:00  REGULAR   3145337   1088823              243
     ...
     ...
-
     '''
-    #your code here
+
+    for i, row in df.iterrows():
+        print row
+
     return df
+
+if __name__ == '__main__':
+    df = pandas.read_csv('data/hourly_entries.csv')
+    get_hourly_entries(df)
