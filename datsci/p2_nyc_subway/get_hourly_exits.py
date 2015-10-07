@@ -31,7 +31,18 @@ def get_hourly_exits(df):
     9              9  A002  R051  02-00-00  05-02-11  12:00:00  REGULAR   3145094   1088753              153            333
     '''
 
-    #your code here
+    # Entries.
+    df['PrevEntriesN'] = df['ENTRIESn'].shift(1)
+    df['ENTRIESn_hourly'] = df['ENTRIESn'] - df['PrevEntriesN']
+    df['ENTRIESn_hourly'] = df['ENTRIESn_hourly'].fillna(0)
+    df.drop('PrevEntriesN', axis=1, inplace=True)
+
+    # Exits.
+    df['PrevExitsN'] = df['EXITSn'].shift(1)
+    df['EXITSn_hourly'] = df['EXITSn'] - df['PrevExitsN']
+    df['EXITSn_hourly'] = df['EXITSn_hourly'].fillna(0)
+    df.drop('PrevExitsN', axis=1, inplace=True)
+
     return df
 
 if __name__ == '__main__':
