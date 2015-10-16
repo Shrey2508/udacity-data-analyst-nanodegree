@@ -12,13 +12,13 @@ In this question, you need to:
 def linear_regression(features, values):
     """
     Perform linear regression given a data set with an arbitrary number of features.
-
-    This can be the same code as in the lesson #3 exercise.
     """
 
-    ###########################
-    ### YOUR CODE GOES HERE ###
-    ###########################
+    features = sm.add_constant(features)
+    model = sm.OLS(values, features)
+    results = model.fit()
+    intercept = results.params[0]
+    params = results.params[1:]
 
     return intercept, params
 
@@ -66,3 +66,9 @@ def predictions(dataframe):
 
     predictions = intercept + np.dot(features, params)
     return predictions
+
+if __name__ == '__main__':
+    filename = '../data/turnstile_data_master_with_weather.csv'
+    dataframe = pandas.read_csv(filename)
+    p = predictions(dataframe)
+    print p
